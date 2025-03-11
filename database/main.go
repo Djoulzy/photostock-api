@@ -9,8 +9,8 @@ import (
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 
-	"github.com/Djoulzy/IStock2/model"
-	"github.com/Djoulzy/IStock2/utils"
+	"github.com/Djoulzy/photostock-api/model"
+	"github.com/Djoulzy/photostock-api/utils"
 )
 
 type Node struct {

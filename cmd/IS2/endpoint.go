@@ -9,10 +9,10 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/Djoulzy/IStock2/diskcopy"
-	"github.com/Djoulzy/IStock2/flow"
-	"github.com/Djoulzy/IStock2/model"
-	"github.com/Djoulzy/IStock2/utils"
+	"github.com/Djoulzy/photostock-api/diskcopy"
+	"github.com/Djoulzy/photostock-api/flow"
+	"github.com/Djoulzy/photostock-api/model"
+	"github.com/Djoulzy/photostock-api/utils"
 	"github.com/gin-gonic/gin"
 )
 

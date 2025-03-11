@@ -14,9 +14,9 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/Djoulzy/IStock2/database"
-	"github.com/Djoulzy/IStock2/model"
-	"github.com/Djoulzy/IStock2/utils"
+	"github.com/Djoulzy/photostock-api/database"
+	"github.com/Djoulzy/photostock-api/model"
+	"github.com/Djoulzy/photostock-api/utils"
 	"github.com/disintegration/imaging"
 )
 

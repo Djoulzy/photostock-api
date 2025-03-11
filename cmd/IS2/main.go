@@ -3,11 +3,11 @@ package main
 import (
 	"log"
 
-	"github.com/Djoulzy/IStock2/database"
-	docs "github.com/Djoulzy/IStock2/docs"
-	"github.com/Djoulzy/IStock2/flow"
-	"github.com/Djoulzy/IStock2/model"
 	"github.com/Djoulzy/Tools/confload"
+	"github.com/Djoulzy/photostock-api/database"
+	docs "github.com/Djoulzy/photostock-api/docs"
+	"github.com/Djoulzy/photostock-api/flow"
+	"github.com/Djoulzy/photostock-api/model"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	swaggerfiles "github.com/swaggo/files"

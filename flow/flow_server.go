@@ -14,9 +14,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/Djoulzy/IStock2/database"
-	"github.com/Djoulzy/IStock2/diskcopy"
-	"github.com/Djoulzy/IStock2/model"
+	"github.com/Djoulzy/photostock-api/database"
+	"github.com/Djoulzy/photostock-api/diskcopy"
+	"github.com/Djoulzy/photostock-api/model"
 )
 
 var (

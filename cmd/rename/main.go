@@ -7,9 +7,9 @@ import (
 	"os"
 	"strings"
 
-	"github.com/Djoulzy/IStock2/database"
-	"github.com/Djoulzy/IStock2/model"
 	"github.com/Djoulzy/Tools/confload"
+	"github.com/Djoulzy/photostock-api/database"
+	"github.com/Djoulzy/photostock-api/model"
 )
 
 var (

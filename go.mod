@@ -1,4 +1,4 @@
-module github.com/Djoulzy/IStock2
+module github.com/Djoulzy/photostock-api
 
 go 1.24.0
 

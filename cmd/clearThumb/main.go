@@ -6,9 +6,9 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/Djoulzy/IStock2/model"
-	"github.com/Djoulzy/IStock2/utils"
 	"github.com/Djoulzy/Tools/confload"
+	"github.com/Djoulzy/photostock-api/model"
+	"github.com/Djoulzy/photostock-api/utils"
 )
 
 var (

@@ -5,7 +5,7 @@ RUN go install github.com/swaggo/swag/cmd/swag@latest
 WORKDIR /go/src/app
 COPY . .
 RUN go get -d -v ./...
-RUN make
+RUN make -f Makefile.docker
 
 #final stage
 FROM alpine:latest

@@ -1,4 +1,4 @@
-# IStock2
+# photostock-api
 
 INSTALL:
 
