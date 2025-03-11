@@ -17,6 +17,24 @@
 # Dependency directories (remove the comment below to include it)
 # vendor/
 node_modules
+volumes/*
+!volumes/.gitkeep
+
+!volumes/import
+volumes/import/*
+!volumes/import/.gitkeep
+
+!volumes/chunks
+volumes/chunks/*
+!volumes/chunks/.gitkeep
+
+!volumes/library
+volumes/library/*
+!volumes/library/.gitkeep
+
+!volumes/db
+volumes/db/*
+!volumes/db/.gitkeep
 
 # Go workspace file
 *.db
