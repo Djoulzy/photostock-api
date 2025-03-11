@@ -17,8 +17,6 @@
 # Dependency directories (remove the comment below to include it)
 # vendor/
 node_modules
-import/*
-!import/.gitkeep
 
 # Go workspace file
 *.db
@@ -29,4 +27,3 @@ go.work
 /clearThumb
 /rename
 .DS_Store
-IS2.ini
