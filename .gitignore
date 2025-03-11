@@ -16,10 +16,17 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+node_modules
+import/*
+!import/.gitkeep
 
 # Go workspace file
+*.db
 go.work
-go.work.sum
-
-# env file
-.env
+/img
+/IS2
+/rebase
+/clearThumb
+/rename
+.DS_Store
+IS2.ini

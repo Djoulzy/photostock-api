@@ -1,0 +1,456 @@
+definitions:
+  main.Form:
+    properties:
+      destId:
+        type: integer
+      srcId:
+        type: integer
+    required:
+    - destId
+    - srcId
+    type: object
+  main.PasswordForm:
+    properties:
+      password:
+        type: string
+    required:
+    - password
+    type: object
+  model.Gallery:
+    properties:
+      copyRight:
+        type: string
+      createdAt:
+        type: string
+      displayName:
+        type: string
+      id:
+        type: integer
+      images:
+        items:
+          $ref: '#/definitions/model.Photo'
+        type: array
+      nbItems:
+        type: integer
+      quality:
+        type: integer
+      rating:
+        type: integer
+      sourceName:
+        type: string
+      tags:
+        type: string
+      thumb:
+        $ref: '#/definitions/model.Photo'
+      thumbId:
+        type: integer
+      updatedAt:
+        type: string
+      views:
+        type: integer
+    type: object
+  model.Photo:
+    properties:
+      createdAt:
+        type: string
+      ext:
+        type: string
+      full:
+        type: string
+      galleryId:
+        type: integer
+      hash:
+        type: string
+      height:
+        type: integer
+      id:
+        type: integer
+      quality:
+        type: integer
+      rank:
+        type: integer
+      updatedAt:
+        type: string
+      width:
+        type: integer
+    type: object
+  model.Settings:
+    properties:
+      appName:
+        type: string
+      contentScreenCols:
+        type: string
+      contentScreenSize:
+        type: string
+      galleryScreenCols:
+        type: string
+      galleryScreenSize:
+        type: string
+      id:
+        type: integer
+    type: object
+info:
+  contact: {}
+paths:
+  /gallery:
+    get:
+      consumes:
+      - application/json
+      description: List all galleries
+      parameters:
+      - description: Offset
+        in: query
+        name: _start
+        type: integer
+      - description: Limit
+        in: query
+        name: _end
+        type: integer
+      - description: Sort by
+        in: query
+        name: _sort
+        type: string
+      - description: Order
+        in: query
+        name: _order
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.Gallery'
+            type: array
+      summary: List all galleries
+      tags:
+      - gallery
+  /gallery/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Gallery and photos
+      parameters:
+      - description: Gallery ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: Delete Gallery
+      tags:
+      - gallery
+    get:
+      consumes:
+      - application/json
+      description: Get one gallery infos by its ID
+      parameters:
+      - description: Gallery ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Offset
+        in: query
+        name: _start
+        type: integer
+      - description: Limit
+        in: query
+        name: _end
+        type: integer
+      - description: Sort by
+        in: query
+        name: _sort
+        type: string
+      - description: Order
+        in: query
+        name: _order
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Gallery'
+      summary: Get one Gallery
+      tags:
+      - gallery
+    put:
+      consumes:
+      - application/json
+      description: Set Model Name and tags
+      parameters:
+      - description: Gallery ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Gallery'
+      summary: Update Gallery infos
+      tags:
+      - gallery
+  /gallery/{id}/update-views:
+    get:
+      consumes:
+      - application/json
+      description: Set views +1
+      parameters:
+      - description: Gallery ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: Update Gallery views
+      tags:
+      - gallery
+  /gallery/mix:
+    post:
+      consumes:
+      - application/json
+      description: mix 2 gals
+      parameters:
+      - description: Source and Destination IDs
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/main.Form'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: Mix two galleries in one
+      tags:
+      - gallery
+  /import:
+    get:
+      consumes:
+      - application/json
+      description: Start import process
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "204":
+          description: No Content
+          schema:
+            type: string
+      summary: Import new Gallery
+      tags:
+      - import
+  /photo:
+    get:
+      consumes:
+      - application/json
+      description: Get photo list from parameters
+      parameters:
+      - description: Gallery ID
+        in: query
+        name: gallery_id
+        required: true
+        type: integer
+      - description: Offset
+        in: query
+        name: _start
+        type: integer
+      - description: Limit
+        in: query
+        name: _end
+        type: integer
+      - description: Sort by
+        in: query
+        name: _sort
+        type: string
+      - description: Order
+        in: query
+        name: _order
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.Photo'
+            type: array
+      summary: Get photo
+      tags:
+      - photo
+  /photo/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get one photo
+      parameters:
+      - description: Photo ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Photo'
+      summary: Get photo
+      tags:
+      - photo
+  /settings:
+    get:
+      consumes:
+      - application/json
+      description: Returns the settings stored in the database.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Settings'
+      summary: Get Settings
+      tags:
+      - settings
+    put:
+      consumes:
+      - application/json
+      description: Updates the settings stored in the database.
+      parameters:
+      - description: Settings object
+        in: body
+        name: settings
+        required: true
+        schema:
+          $ref: '#/definitions/model.Settings'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Settings'
+      summary: Update Settings
+      tags:
+      - settings
+  /settings/auth:
+    post:
+      consumes:
+      - application/json
+      description: Compare provided MD5 encoded password (in plain text, which is
+        then hashed) with the stored settings password.
+      parameters:
+      - description: Password
+        in: body
+        name: password
+        required: true
+        schema:
+          $ref: '#/definitions/main.PasswordForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: true if the password matches, false otherwise
+          schema:
+            type: boolean
+      summary: Compare password
+      tags:
+      - settings
+  /thumb/{galId}/{imgId}/{hash}/{size}:
+    get:
+      consumes:
+      - application/json
+      description: Get thumbnail information by its ID
+      parameters:
+      - description: Gallery ID
+        in: path
+        name: galId
+        required: true
+        type: integer
+      - description: Image ID
+        in: path
+        name: imgId
+        required: true
+        type: integer
+      - description: Thumb hash
+        in: path
+        name: hash
+        required: true
+        type: string
+      - description: Thumb width in pixel
+        in: path
+        name: size
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: Get thumbnail by ID
+      tags:
+      - thumb
+  /upload:
+    get:
+      consumes:
+      - application/json
+      description: Returns upload endpoint information.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Upload endpoint OK
+          schema:
+            type: string
+      summary: Get Upload
+      tags:
+      - upload
+    post:
+      consumes:
+      - multipart/form-data
+      description: Handles file upload and saves the file.
+      parameters:
+      - description: File to upload
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: File uploaded successfully
+          schema:
+            type: string
+      summary: Post Upload
+      tags:
+      - upload
+swagger: "2.0"

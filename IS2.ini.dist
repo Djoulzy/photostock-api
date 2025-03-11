@@ -1,0 +1,20 @@
+[Globals]
+LogLevel = 5
+; Mode = "release" ; "debug"
+StartLogging = true
+DBType = "pgsql"
+HTTP_addr = "192.168.0.5:6969"
+AbsoluteBankPath = "/img"
+ImportDir = "./import"
+ChunkDir = "./chunks"
+DBDriver = "sqlite"
+
+[Postgres]
+DBHost = "localhost"
+DBPort = "5432"
+DBName = "photostock"
+DBUser = "photostock"
+DBPasswd = "admin"
+
+[SQLite]
+DBPath = "./istock.db"
