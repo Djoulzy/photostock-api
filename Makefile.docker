@@ -1,8 +1,8 @@
 all:
-	make main
-	make rebase
-	make clearThumb
-	make rename
+	make -f Makefile.docker main
+	make -f Makefile.docker rebase
+	make -f Makefile.docker clearThumb
+	make -f Makefile.docker rename
 
 clean:
 	go clean -i -cache -modcache

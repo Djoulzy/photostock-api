@@ -13,6 +13,6 @@ RUN apk update && apk upgrade
 RUN apk --no-cache add ca-certificates sqlite
 COPY --from=builder /go/bin/app /app
 COPY --from=builder /go/src/app/photostock.ini /app
-ENTRYPOINT /app/IS2 -f /app/photostock.ini
 LABEL Name=photostock-api Version=0.0.1
 EXPOSE 4444
+CMD [ "/app/IS2", "-f", "/app/photostock.ini" ]
