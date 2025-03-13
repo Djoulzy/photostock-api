@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"strings"
 
 	"github.com/Djoulzy/Tools/confload"
 	"github.com/Djoulzy/photostock-api/database"
@@ -36,7 +37,8 @@ func main() {
 	router.Use(cors.New(config))
 
 	docs.SwaggerInfo.BasePath = "/api/v1"
-	router.Static("/img", "./img")
+	base := strings.TrimRight(conf.AbsoluteBankPath, "/")
+	router.Static("/img", base)
 
 	v1 := router.Group(docs.SwaggerInfo.BasePath)
 	{

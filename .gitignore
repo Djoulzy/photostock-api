@@ -41,6 +41,7 @@ volumes/db/*
 go.work
 /img
 /IS2
+IS2.ini
 /rebase
 /clearThumb
 /rename
