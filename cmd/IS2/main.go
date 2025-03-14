@@ -39,6 +39,7 @@ func main() {
 	docs.SwaggerInfo.BasePath = "/api/v1"
 	base := strings.TrimRight(conf.AbsoluteBankPath, "/")
 	router.Static("/img", base)
+	log.Println("Serving images from: " + base)
 
 	v1 := router.Group(docs.SwaggerInfo.BasePath)
 	{
