@@ -58,6 +58,7 @@ func main() {
 		v1.GET("/settings", getSettings)
 		v1.PUT("/settings", updateSettings)
 		v1.POST("/settings/auth", comparePassword)
+		v1.PATCH("/settings/auth", changePassword)
 
 		v1.GET("/import", getImport)
 

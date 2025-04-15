@@ -456,6 +456,38 @@ const docTemplate = `{
                         }
                     }
                 }
+            },
+            "patch": {
+                "description": "Update the admin password.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "settings"
+                ],
+                "summary": "change password",
+                "parameters": [
+                    {
+                        "description": "Password",
+                        "name": "password",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/main.PasswordForm"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "true if the password is correctly updated, false otherwise",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    }
+                }
             }
         },
         "/thumb/{galId}/{imgId}/{hash}/{size}": {
