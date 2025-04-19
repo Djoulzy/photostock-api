@@ -1,0 +1,20 @@
+[Globals]
+LogLevel = 5
+; Mode = "release" ; "debug"
+StartLogging = true
+HTTP_addr = "0.0.0.0:4444"
+AbsoluteBankPath = "./volumes/library"
+ImportDir = "./volumes/import"
+ChunkDir = "./volumes/chunks"
+AssetsDir = "./volumes/assets"
+DBDriver = "sqlite"
+
+; [Postgres]
+; DBHost = "localhost"
+; DBPort = "5432"
+; DBName = "photostock"
+; DBUser = "photostock"
+; DBPasswd = "admin"
+
+[SQLite]
+DBPath = "./volumes/db/istock.db"
