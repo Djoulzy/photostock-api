@@ -362,6 +362,27 @@ paths:
       tags:
       - settings
   /settings/auth:
+    patch:
+      consumes:
+      - application/json
+      description: Update the admin password.
+      parameters:
+      - description: Password
+        in: body
+        name: password
+        required: true
+        schema:
+          $ref: '#/definitions/main.PasswordForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: true if the password is correctly updated, false otherwise
+          schema:
+            type: boolean
+      summary: change password
+      tags:
+      - settings
     post:
       consumes:
       - application/json

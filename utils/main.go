@@ -3,10 +3,13 @@ package utils
 import (
 	"crypto/md5"
 	"encoding/hex"
+	"fmt"
 	"os"
 	"path/filepath"
 	"strconv"
 	"strings"
+
+	"log"
 )
 
 type FileInfo struct {
@@ -36,9 +39,20 @@ func GetFullImagePath(galId uint64, hash string, ext string) string {
 
 func SearchForJSONFiles(rootDir string) ([]FileInfo, error) {
 	var fileInfos []FileInfo
+	var stat, _ = os.Lstat(rootDir)
+
+	if stat.Mode()&os.ModeSymlink == os.ModeSymlink {
+		// If the rootDir is a symlink, resolve it to its target
+		resolvedPath, err := filepath.EvalSymlinks(rootDir)
+		if err != nil {
+			return nil, fmt.Errorf("failed to resolve symlink: %w", err)
+		}
+		rootDir = resolvedPath
+	}
 
 	err := filepath.Walk(rootDir, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
+			log.Printf("Error walking the path %s: %v", path, err)
 			return err
 		}
 		if !info.IsDir() && info.Name() == "infos.json" {

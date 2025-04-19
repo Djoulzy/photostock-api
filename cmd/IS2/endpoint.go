@@ -328,9 +328,9 @@ func mixGalleries(c *gin.Context) {
 // @Summary		Compare password
 // @Schemes
 // @Description Compare provided MD5 encoded password (in plain text, which is then hashed) with the stored settings password.
-// @Tags settings
-// @Accept json
-// @Produce json
+// @Tags		settings
+// @Accept		json
+// @Produce		json
 // @Param       password body PasswordForm true "Password"
 // @Success     200 {boolean} boolean "true if the password matches, false otherwise"
 // @Router      /settings/auth [post]
@@ -352,6 +352,36 @@ func comparePassword(c *gin.Context) {
 	// Compare the computed hash with the stored password.
 	valid := form.Password == settings.Password
 	JSON(c, http.StatusOK, 0, valid)
+}
+
+// @Summary		change password
+// @Schemes
+// @Description Update the admin password.
+// @Tags		settings
+// @Accept		json
+// @Produce		json
+// @Param       password body PasswordForm true "Password"
+// @Success     200 {boolean} boolean "true if the password is correctly updated, false otherwise"
+// @Router      /settings/auth [patch]
+func changePassword(c *gin.Context) {
+	var form PasswordForm
+	if err := c.ShouldBindJSON(&form); err != nil {
+		JSON(c, http.StatusBadRequest, 0, nil)
+		return
+	}
+
+	// Retrieve the stored settings. Assuming there's one settings record.
+	var settings model.Settings
+	if err := DB.Db.First(&settings).Error; err != nil {
+		JSON(c, http.StatusNotFound, 0, nil)
+		return
+	}
+	settings.Password = form.Password
+	if err := DB.Db.Save(&settings).Error; err != nil {
+		JSON(c, http.StatusInternalServerError, 0, err.Error())
+		return
+	}
+	JSON(c, http.StatusOK, 0, "ok")
 }
 
 // @Summary Get Settings
