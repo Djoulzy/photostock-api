@@ -21,14 +21,14 @@ func main() {
 	confload.Load("IS2.ini", conf)
 	DB.Connect(conf)
 
-	names, err := LoadCSVFile("assets/name.csv")
+	names, err := LoadCSVFile(conf.Globals.AssetsDir + "/name.csv")
 	if err != nil {
 		fmt.Printf("Erreur lors du chargement du CSV : %v\n", err)
 		return
 	}
 	fmt.Println("Names loaded...")
 
-	copyrights, err := LoadCSVFile("assets/copyright.csv")
+	copyrights, err := LoadCSVFile(conf.Globals.AssetsDir + "/copyright.csv")
 	if err != nil {
 		fmt.Printf("Erreur lors du chargement du CSV : %v\n", err)
 		return
