@@ -10,6 +10,7 @@ type Globals struct {
 	ImportDir        string
 	ChunkDir         string
 	DBDriver         string
+	AssetsDir        string
 }
 
 type Postgres struct {
