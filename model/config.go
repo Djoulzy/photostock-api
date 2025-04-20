@@ -6,6 +6,7 @@ type Globals struct {
 	Mode             string
 	DBType           string
 	HTTP_addr        string
+	HTTP_port        string
 	AbsoluteBankPath string
 	ImportDir        string
 	ChunkDir         string

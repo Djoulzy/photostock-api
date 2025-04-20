@@ -2,6 +2,8 @@ package main
 
 import (
 	"log"
+	"net"
+	"os"
 	"strings"
 
 	"github.com/Djoulzy/Tools/confload"
@@ -20,12 +22,37 @@ var (
 	DB   database.Node
 )
 
+func GetOutboundIP() net.IP {
+	conn, err := net.Dial("udp", "8.8.8.8:80")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer conn.Close()
+
+	localAddr := conn.LocalAddr().(*net.UDPAddr)
+
+	return localAddr.IP
+}
+
 func main() {
+	var serverAddress string
 	confload.Load("IS2.ini", conf)
 	DB.Connect(conf)
 	flow.StartUploadFileAssembler(&DB, conf)
 
-	log.Printf("\n\nAPI DOCS: http://%s/swagger/index.html\n\n", conf.Globals.HTTP_addr)
+	if conf.Globals.HTTP_addr == "" {
+		serverAddress = GetOutboundIP().String()
+	} else {
+		serverAddress = conf.Globals.HTTP_addr
+	}
+
+	if conf.Globals.HTTP_port == "" {
+		serverAddress = serverAddress + ":" + os.Getenv("PHOTOSTOCK_API_PORT")
+	} else {
+		serverAddress = serverAddress + ":" + conf.Globals.HTTP_port
+	}
+
+	log.Printf("\n\nAPI DOCS: http://%s/swagger/index.html\n\n", serverAddress)
 
 	if conf.Globals.Mode == "release" {
 		gin.SetMode(gin.ReleaseMode)
@@ -68,5 +95,5 @@ func main() {
 	}
 
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
-	router.Run(conf.Globals.HTTP_addr)
+	router.Run(serverAddress)
 }
